@@ -26,7 +26,6 @@ def getConceptContents():
             lines=csv.reader(myFile)
             for line in lines: 
                 codes.append(line[1])
-            print(codes)
     for i in range (1,len(codes)):
         df = pro.concept_detail(id=codes[i], fields='ts_code,name')
         df.to_excel('concept'+str(i)+contents.xlsx)
