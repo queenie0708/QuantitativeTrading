@@ -6,3 +6,4 @@ tushare
 lxml
 pymysql
 sqlalchemy
+xlrd
