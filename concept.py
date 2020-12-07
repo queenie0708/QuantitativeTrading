@@ -46,17 +46,26 @@ def getStockMV():
         new.to_excel('concept'+str(i)+'.xlsx')
 
 def processConcept():
-    df = pd.read_excel('concept1.xlsx')
-    sum_mv =  df['total_mv'].sum()
+    for i in range(1,360):
+        df = pd.read_excel('concept'+str(i)+'.xlsx')
+        sum_mv =  df['total_mv'].sum()
+        price_pct=df['total_mv']/sum_mv*df['close']
+        df['price_pct'] = price_pct
+        df.to_excel('concept'+str(i)+'.xlsx')
 
-    writer = pd.ExcelWriter('concept1.xlsx',,startcol=8)
-    writer.save()
-    writer.close()
+def getConceptIndex():
+    concept_index = []
+    for i in range(1,360):
+        df = pd.read_excel('concept'+str(i)+'.xlsx')
+        sum_share = df['price_pct'].sum()
+        concept_index.append(sum_share)
+        concept = pd.read_excel('all_concepts.xlsx')
+    concept['concept_index'] = concept_index
+    concept.to_excel('all_concepts.xlsx')
 
-    
 
 def _main():
-    processConcept()
+    getConceptIndex()
 
 if __name__ == '__main__':
     _main()
