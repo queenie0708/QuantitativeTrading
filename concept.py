@@ -4,10 +4,6 @@ import tushare as ts
 import csv
 import json
 import pandas as pd
-from openpyxl import Workbook
-from openpyxl import load_workbook
-import glob
-import os
 
 auth = open('./auth.json')
 info = json.load(auth)
@@ -34,7 +30,7 @@ def getConceptContents():
         df = pro.concept_detail(id=codes[i], fields='ts_code,name')
         df.to_excel('concept'+str(i)+contents.xlsx)
 
-def getAlldata():
+def getYearlyData():
     df = pro.daily_basic(trade_date='20201204', fields='ts_code,total_mv,close')
     df.to_excel('mv_price.xlsx')
 
@@ -65,7 +61,7 @@ def getConceptIndex():
 
 
 def _main():
-    getConceptIndex()
+    getAlldata()
 
 if __name__ == '__main__':
     _main()
