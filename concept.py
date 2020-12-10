@@ -49,7 +49,7 @@ def getYearlyData():
                 name.to_excel(writer, sheet_name=str(i))
         writer.save()
 
-def getIndexData():
+def getIndexData():  #上证指数
     df = pro.index_daily(ts_code='000001.SH', start_date='20200102', end_date='20201207', fields='ts_code,trade_date,close')
     df.to_excel('index_close.xlsx')
 
@@ -68,7 +68,7 @@ def getStockMV():
                 new.to_excel(writer,index=False)
                 writer.save()
 
-def processConcept():
+def getStockPricePct():
     xl = pd.read_excel('index_close.xlsx')
     date = xl['trade_date']
     with pd.ExcelWriter('concept14contents.xlsx') as writer:
